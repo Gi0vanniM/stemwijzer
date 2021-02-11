@@ -1,3 +1,8 @@
+//soort van enums
+const menu = {
+    START: 'start',
+    STATEMENTS: 'statements',
+};
 // start button
 let startButton = document.getElementById('start-button');
 // start screen container
@@ -10,16 +15,47 @@ let title = document.getElementById('title');
 let statement = document.getElementById('statement');
 // currently selected statement 
 let statementNumber = 0;
+// back button
+let backButton = document.getElementById('back-button');
 
 // parties
 // subjects
 
-startButton.onclick = function() {
-    startScreen.hidden = true;
-    statementsScreen.hidden = false;
-    nextQuestion();
+// get the next or previous statement
+function getStatement() {
+
 }
 
-function nextQuestion() {
+// 
+function getMenu(selectedMenu) {
+    switch (selectedMenu) {
+        case menu.START:
+            startScreen.hidden = false;
+            statementsScreen.hidden = true;
+            break;
+        case menu.STATEMENTS:
+            startScreen.hidden = true;
+            statementsScreen.hidden = false;
+            break;
 
+        default:
+            // nothing
+            break;
+    }
+}
+
+/**
+ * Event listeners
+ */
+startButton.onclick = function () {
+    getMenu(menu.STATEMENTS);
+    getStatement();
+}
+
+backButton.onclick = function () {
+    if (statementNumber <= 0) {
+        getMenu(menu.START);
+    } else {
+        getStatement();
+    }
 }
