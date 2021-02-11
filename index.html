@@ -17,7 +17,8 @@
 </head>
 <body>
 
-    <div class="container">
+    <!-- starting screen -->
+    <div id="start-screen" class="container">
 
         <div id="start-jumbotron" class="jumbotron border rounded p-4 m-4">
             <h1 class="display-4">Stemwijzer</h1>
@@ -26,9 +27,18 @@
                 <button id="start-button" class="btn btn-primary">Start</button>
             </p>
         </div>
+    </div>
 
-        <div id="questions" class="border rounded p-4 m-4" hidden>
-            <h1 id="question" class="text-center">Vraag?</h1>
+    <!-- statements screen -->
+    <div id="statements-screen" class="container" hidden>
+
+        <nav id="statements-navbar" class="navbar">
+            <button type="button" class="btn btn-secondary"></button>
+        </nav>
+
+        <div id="questions" class="p-4 m-4">
+            <h1 id="title" class="text-center">title</h1>
+            <h2 id="statement" class="text-center"><b>statement</b></h2>
             <div class="text-center">
                 <button type="button" id="button-yes" class="btn btn-success btn-lg"><i class="fas fa-thumbs-up"></i> <b>Eens</b></button>
                 <button type="button" id="button-none" class="btn btn-light btn-lg"><b>~ Geen van beide</b></button>
