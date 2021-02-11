@@ -1,8 +1,11 @@
 //soort van enums
-const MENU = {
+const MENU = Object.freeze({
     START: 'start',
     STATEMENTS: 'statements',
-};
+});
+const STATEMENTS = Object.freeze(subjects);
+const PARTIES = Object.freeze(parties);
+
 // start button
 let startButton = document.getElementById('start-button');
 // start screen container
@@ -23,7 +26,7 @@ let backButton = document.getElementById('back-button');
 
 // get the next or previous statement
 function getStatement() {
-
+    
 }
 
 // 
