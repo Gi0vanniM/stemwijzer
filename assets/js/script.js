@@ -1,5 +1,5 @@
 //soort van enums
-const menu = {
+const MENU = {
     START: 'start',
     STATEMENTS: 'statements',
 };
@@ -29,11 +29,11 @@ function getStatement() {
 // 
 function getMenu(selectedMenu) {
     switch (selectedMenu) {
-        case menu.START:
+        case MENU.START:
             startScreen.hidden = false;
             statementsScreen.hidden = true;
             break;
-        case menu.STATEMENTS:
+        case MENU.STATEMENTS:
             startScreen.hidden = true;
             statementsScreen.hidden = false;
             break;
@@ -48,13 +48,13 @@ function getMenu(selectedMenu) {
  * Event listeners
  */
 startButton.onclick = function () {
-    getMenu(menu.STATEMENTS);
+    getMenu(MENU.STATEMENTS);
     getStatement();
 }
 
 backButton.onclick = function () {
     if (statementNumber <= 0) {
-        getMenu(menu.START);
+        getMenu(MENU.START);
     } else {
         getStatement();
     }
