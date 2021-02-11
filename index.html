@@ -15,10 +15,22 @@
 <body>
 
     <div class="container">
-        <div class="jumbotron jumbotron-fluid">
+
+        <div id="start-jumbotron" class="jumbotron border rounded p-4 m-4">
             <h1 class="display-4">Stemwijzer</h1>
             <p class="lead">Om de stemwijzer te starten druk op de start knop</p>
+            <p class="lead">
+                <button id="start-button" class="btn btn-primary">Start</button>
+            </p>
+        </div>
 
+        <div id="questions" class="border rounded p-4 m-4" >
+            <h1 id="question" class="text-center">Vraag?</h1>
+            <div class="">
+                <button type="button" id="button-yes" class="btn btn-success">Ja</button>
+                <button type="button" id="button-none" class="btn btn-light">~ Geen van beide</button>
+                <button type="button" id="button-no" class="btn btn-danger">Nee</button>
+            </div>
         </div>
 
     </div>
@@ -27,5 +39,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <!-- party data -->
     <script src="http://stemwijzer.dvc-icta.nl/data.js"></script>
+    <!-- local js -->
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
