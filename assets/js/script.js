@@ -21,15 +21,19 @@ let statementNumber = 0;
 // back button
 let backButton = document.getElementById('back-button');
 
+// user's answers
+let answers = [];
+
 // parties
 // subjects
 
 // get the next or previous statement
-function getStatement() {
-    
+function displayStatement(i = statementNumber) {
+    title.innerHTML = STATEMENTS[i].title;
+    statement.innerHTML = STATEMENTS[i].statement.bold();
 }
 
-// 
+// get a menu
 function getMenu(selectedMenu) {
     switch (selectedMenu) {
         case MENU.START:
@@ -40,7 +44,6 @@ function getMenu(selectedMenu) {
             startScreen.hidden = true;
             statementsScreen.hidden = false;
             break;
-
         default:
             // nothing
             break;
@@ -52,13 +55,13 @@ function getMenu(selectedMenu) {
  */
 startButton.onclick = function () {
     getMenu(MENU.STATEMENTS);
-    getStatement();
+    displayStatement(statementNumber);
 }
 
 backButton.onclick = function () {
     if (statementNumber <= 0) {
         getMenu(MENU.START);
     } else {
-        getStatement();
+        displayStatement(statementNumber--);
     }
 }
