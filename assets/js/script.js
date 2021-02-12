@@ -22,21 +22,44 @@ let statementNumber = 0;
 let backButton = document.getElementById('back-button');
 
 // statement buttons
-let buttonYes = document.getElementById('button-yes');
-let buttonNo = document.getElementById('button-no');
+let buttonPro = document.getElementById('button-pro');
+let buttonContra = document.getElementById('button-contra');
 let buttonNone = document.getElementById('button-none');
 let buttonSkip = document.getElementById('button-skip');
 
 // user's answers
 let answers = [];
 
+// pro contra none
+
 // parties
 // subjects
 
 // get the next or previous statement
 function displayStatement(i = statementNumber) {
-    title.innerHTML = STATEMENTS[i].title;
+    title.innerHTML = i + '. ' + STATEMENTS[i].title;
     statement.innerHTML = STATEMENTS[i].statement.bold();
+}
+
+// action
+function actionStatement(button) {
+    switch (button) {
+        case 'pro':
+            //
+            break;
+        case 'contra':
+            //
+            break;
+        case 'none':
+            //
+            break;
+        case 'skip':
+            //
+            break;
+        default:
+            break;
+    }
+    displayStatement(++statementNumber);
 }
 
 // get a menu
@@ -68,6 +91,19 @@ backButton.onclick = function () {
     if (statementNumber <= 0) {
         getMenu(MENU.START);
     } else {
-        displayStatement(statementNumber--);
+        displayStatement(--statementNumber);
     }
+}
+
+buttonPro.onclick = function () {
+    actionStatement('pro');
+}
+buttonContra.onclick = function () {
+    actionStatement('contra');
+}
+buttonNone.onclick = function () {
+    actionStatement('none');
+}
+buttonSkip.onclick = function () {
+    actionStatement('skip');
 }
