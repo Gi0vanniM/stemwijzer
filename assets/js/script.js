@@ -45,16 +45,16 @@ function displayStatement(i = statementNumber) {
 function actionStatement(button) {
     switch (button) {
         case 'pro':
-            //
+            answers.push({ id: statementNumber, opinion: 'pro' });
             break;
         case 'contra':
-            //
+            answers.push({ id: statementNumber, opinion: 'contra' });
             break;
         case 'none':
-            //
+            answers.push({ id: statementNumber, opinion: 'none' });
             break;
         case 'skip':
-            //
+            answers.push({ id: statementNumber, opinion: '' });
             break;
         default:
             break;
