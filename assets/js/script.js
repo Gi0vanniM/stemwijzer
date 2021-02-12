@@ -21,6 +21,12 @@ let statementNumber = 0;
 // back button
 let backButton = document.getElementById('back-button');
 
+// statement buttons
+let buttonYes = document.getElementById('button-yes');
+let buttonNo = document.getElementById('button-no');
+let buttonNone = document.getElementById('button-none');
+let buttonSkip = document.getElementById('button-skip');
+
 // user's answers
 let answers = [];
 
