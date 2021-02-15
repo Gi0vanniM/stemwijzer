@@ -37,7 +37,7 @@ let answers = [];
 
 // get the next or previous statement
 function displayStatement(i = statementNumber) {
-    title.innerHTML = i + '. ' + STATEMENTS[i].title;
+    title.innerHTML = (i + 1) + '. ' + STATEMENTS[i].title;
     statement.innerHTML = STATEMENTS[i].statement.bold();
 }
 
