@@ -35,13 +35,20 @@ let answers = [];
 // parties
 // subjects
 
-// get the next or previous statement
+// 
+/**
+ * get the next or previous statement
+ * @param {statementNumber} i
+ */
 function displayStatement(i = statementNumber) {
     title.innerHTML = (i + 1) + '. ' + STATEMENTS[i].title;
     statement.innerHTML = STATEMENTS[i].statement.bold();
 }
 
-// action
+/**
+ *
+ * @param {'pro' | 'contra' | 'none' | 'skip'} button
+ */
 function actionStatement(button) {
     switch (button) {
         case 'pro':
@@ -62,7 +69,10 @@ function actionStatement(button) {
     displayStatement(++statementNumber);
 }
 
-// get a menu
+/**
+ * display a menu
+ * @param {*} selectedMenu
+ */
 function getMenu(selectedMenu) {
     switch (selectedMenu) {
         case MENU.START:
