@@ -6,3 +6,9 @@ html, body, .container{
     background-color: blue !important;
     color: white !important;
 }
+
+.background {
+    background: url('../img/background.png') no-repeat center fixed;
+    background-size: cover;
+    transition: .5s;
+}

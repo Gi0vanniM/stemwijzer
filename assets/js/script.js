@@ -2,6 +2,7 @@
 const MENU = Object.freeze({
     START: 'start',
     STATEMENTS: 'statements',
+    RESULTS: 'results',
 });
 const STATEMENTS = subjects;
 const PARTIES = parties;
@@ -12,6 +13,8 @@ let startButton = document.getElementById('start-button');
 let startScreen = document.getElementById('start-screen')
 // statements screen container
 let statementsScreen = document.getElementById('statements-screen');
+// restult screen contianer
+let resultsScreen = document.getElementById('results-screen');
 // title of question/statement
 let title = document.getElementById('title');
 // statement
@@ -67,9 +70,7 @@ function actionStatement(opinion) {
             answers[statementNumber] = { opinion: opinion };
             break;
     }
-    if (statementNumber <= STATEMENTS.length) {
-        displayStatement(++statementNumber);
-    }
+    displayStatement(++statementNumber);
 }
 
 /**
@@ -77,14 +78,20 @@ function actionStatement(opinion) {
  * @param {*} selectedMenu
  */
 function getMenu(selectedMenu) {
+    startScreen.hidden = true;
+    statementsScreen.hidden = true;
+    resultsScreen.hidden = true;
+    document.body.classList.remove('background');
     switch (selectedMenu) {
         case MENU.START:
             startScreen.hidden = false;
-            statementsScreen.hidden = true;
+            document.body.classList.add('background');
             break;
         case MENU.STATEMENTS:
-            startScreen.hidden = true;
             statementsScreen.hidden = false;
+            break;
+        case MENU.RESULTS:
+            resultsScreen.hidden = false;
             break;
         default:
             // nothing
