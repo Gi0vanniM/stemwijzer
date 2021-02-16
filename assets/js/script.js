@@ -3,8 +3,8 @@ const MENU = Object.freeze({
     START: 'start',
     STATEMENTS: 'statements',
 });
-const STATEMENTS = Object.freeze(subjects);
-const PARTIES = Object.freeze(parties);
+const STATEMENTS = subjects;
+const PARTIES = parties;
 
 // start button
 let startButton = document.getElementById('start-button');
@@ -67,7 +67,9 @@ function actionStatement(opinion) {
             answers[statementNumber] = { opinion: opinion };
             break;
     }
-    displayStatement(++statementNumber);
+    if (statementNumber <= STATEMENTS.length) {
+        displayStatement(++statementNumber);
+    }
 }
 
 /**
