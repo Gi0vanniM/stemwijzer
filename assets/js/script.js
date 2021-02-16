@@ -26,6 +26,12 @@ let buttonPro = document.getElementById('button-pro');
 let buttonContra = document.getElementById('button-contra');
 let buttonNone = document.getElementById('button-none');
 let buttonSkip = document.getElementById('button-skip');
+let allStatementButtons = {
+    'pro': buttonPro,
+    'contra': buttonContra,
+    'none': buttonNone,
+    'skip': buttonSkip
+};
 
 // user's answers
 let answers = [];
@@ -43,31 +49,22 @@ let answers = [];
 function displayStatement(i = statementNumber) {
     title.innerHTML = (i + 1) + '. ' + STATEMENTS[i].title;
     statement.innerHTML = STATEMENTS[i].statement.bold();
+    if (answers[statementNumber] !== undefined) {
+        highlightButtons();
+    }
 }
 
 /**
  *
  * @param {'pro' | 'contra' | 'none' | 'skip'} button
  */
-function actionStatement(button) {
-    switch (button) {
+function actionStatement(opinion) {
+    switch (opinion) {
         case 'pro':
-            // answers.push({ id: statementNumber, opinion: 'pro' });
-            answers[statementNumber] = { opinion: button };
-            break;
         case 'contra':
-            // answers.push({ id: statementNumber, opinion: 'contra' });
-            answers[statementNumber] = { opinion: button };
-            break;
         case 'none':
-            // answers.push({ id: statementNumber, opinion: 'none' });
-            answers[statementNumber] = { opinion: button };
-            break;
         case 'skip':
-            // answers.push({ id: statementNumber, opinion: '' });
-            answers[statementNumber] = { opinion: button };
-            break;
-        default:
+            answers[statementNumber] = { opinion: opinion };
             break;
     }
     displayStatement(++statementNumber);
@@ -94,6 +91,27 @@ function getMenu(selectedMenu) {
 }
 
 /**
+ * highlight the selected opinion
+ * 
+ */
+function highlightButtons() {
+    for (const key in allStatementButtons) {
+        if (Object.hasOwnProperty.call(allStatementButtons, key)) {
+            let button = allStatementButtons[key];
+            if (button.classList.contains("active")) {
+                button.classList.remove("active");
+            }
+        }
+    }
+    if (answers[statementNumber] !== undefined) {
+        // get the answer of current statement
+        let b = answers[statementNumber];
+        // get the needed button and then highlight it by using the 'active' class
+        allStatementButtons[b.opinion].classList.add("active");
+    }
+}
+
+/**
  * Event listeners
  */
 startButton.onclick = function () {
@@ -111,13 +129,17 @@ backButton.onclick = function () {
 
 buttonPro.onclick = function () {
     actionStatement('pro');
+    this.blur();
 }
 buttonContra.onclick = function () {
     actionStatement('contra');
+    this.blur();
 }
 buttonNone.onclick = function () {
     actionStatement('none');
+    this.blur();
 }
 buttonSkip.onclick = function () {
     actionStatement('skip');
+    this.blur();
 }
