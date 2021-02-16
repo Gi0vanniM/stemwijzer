@@ -27,6 +27,8 @@ let statement = document.getElementById('statement');
 let statementNumber = 0;
 // back button
 let backButton = document.getElementById('back-button');
+// get the parent div of title and statement
+let statementParent = document.getElementById('statements-parent');
 
 // important subjects/statements
 let importantSubjects = document.getElementById('important-subjects');
@@ -43,6 +45,7 @@ let allStatementButtons = {
     'none': buttonNone,
     'skip': buttonSkip
 };
+let statementButtons = document.getElementById('statement-buttons');
 
 // user's answers
 let answers = [];
@@ -52,16 +55,28 @@ let answers = [];
 // parties
 // subjects
 
+// generate the important subjects list
+createImportantSubjects();
+
 // 
 /**
  * get the next or previous statement
  * @param {statementNumber} i
  */
 function displayStatement(i = statementNumber) {
-    title.innerHTML = (i + 1) + '. ' + STATEMENTS[i].title;
-    statement.innerHTML = STATEMENTS[i].statement.bold();
-    if (answers[statementNumber] !== undefined) {
-        highlightButtons();
+    if (statementNumber >= STATEMENTS.length) {
+        statementButtons.hidden = true;
+        statementParent.hidden = true;
+        importantSubjects.hidden = false;
+    } else {
+        statementButtons.hidden = false;
+        statementParent.hidden = false;
+        importantSubjects.hidden = true;
+        title.innerHTML = (i + 1) + '. ' + STATEMENTS[i].title;
+        statement.innerHTML = STATEMENTS[i].statement.bold();
+        if (answers[statementNumber] !== undefined) {
+            highlightButtons();
+        }
     }
 }
 
@@ -78,11 +93,7 @@ function actionStatement(opinion) {
             answers[statementNumber] = { opinion: opinion };
             break;
     }
-    if (statementNumber + 1 >= STATEMENTS.length) {
-        getMenu(MENU.RESULTS);
-    } else {
-        displayStatement(++statementNumber);
-    }
+    displayStatement(++statementNumber);
 }
 
 /**
@@ -111,8 +122,10 @@ function getMenu(selectedMenu) {
     }
 }
 
-function showImportantSubjects() {
-
+/**
+ * display subjects the user can choose is extra important
+ */
+function createImportantSubjects() {
     STATEMENTS.forEach(statement => {
         let div = `<div class="col-md-6 col-lg-4 mb-1">
         <label class="col-12 btn btn-white border rounded mx-n1">
@@ -124,7 +137,6 @@ function showImportantSubjects() {
         template.innerHTML = div;
         importantSubjectsCheckboxes.appendChild(template.content.firstChild);
     });
-
 }
 
 /**

@@ -34,13 +34,13 @@
     </div>
 
     <!-- statements screen -->
-    <div id="statements-screen" class="container" hidden>
+    <div id="statements-screen" class="container-fluid" hidden>
 
         <nav id="statements-navbar" class="navbar">
             <button id="back-button" type="button" class="btn btn-secondary"><i class="fas fa-arrow-left"></i></button>
         </nav>
 
-        <div id="questions" class="p-4 m-4">
+        <div id="statements-parent" class="p-4 m-4">
             <h1 id="title" class="text-center">title</h1>
             <h2 id="statement" class="text-center"><b>statement</b></h2>
         </div>
@@ -62,9 +62,20 @@
 
         </div>
 
-        <div id="important-subjects" class="gap-2 form-check rounded p-5 bg-light" hidden>
+        <div id="important-subjects" class="gap-2 form-check rounded p-5" hidden>
         
-            <div id="important-subjects-checkboxes" class="row m-0">
+            <div class="row">
+                <h1 id="important-subjects-title" class="col text-left">
+                    <b>Zijn er onderwerpen die je extra belangrijk vindt?</b>
+                </h1>
+        
+                <div class="col">
+                    <button type="button" class="btn btn-primary float-right" id="important-subjects-next">Volgende
+                        stap</button>
+                </div>
+            </div>
+
+            <div id="important-subjects-checkboxes" class="row m-0 p-5 rounded bg-light">
             </div>
         </div>
     </div>
