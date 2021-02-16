@@ -28,6 +28,10 @@ let statementNumber = 0;
 // back button
 let backButton = document.getElementById('back-button');
 
+// important subjects/statements
+let importantSubjects = document.getElementById('important-subjects');
+let importantSubjectsCheckboxes = document.getElementById('important-subjects-checkboxes');
+
 // statement buttons
 let buttonPro = document.getElementById('button-pro');
 let buttonContra = document.getElementById('button-contra');
@@ -105,6 +109,22 @@ function getMenu(selectedMenu) {
             // nothing
             break;
     }
+}
+
+function showImportantSubjects() {
+
+    STATEMENTS.forEach(statement => {
+        let div = `<div class="col-md-6 col-lg-4 mb-1">
+        <label class="col-12 btn btn-white border rounded mx-n1">
+            <input type="checkbox" class="px-2 form-check-input mx-0" id="subject-${statement.id}">
+            <p id="important-subject-text-${statement.id}" class="ml-2 m-0">${statement.title}</p>
+        </label>
+    </div>`;
+        let template = document.createElement('template');
+        template.innerHTML = div;
+        importantSubjectsCheckboxes.appendChild(template.content.firstChild);
+    });
+
 }
 
 /**
