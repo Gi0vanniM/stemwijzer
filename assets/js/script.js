@@ -4,8 +4,12 @@ const MENU = Object.freeze({
     STATEMENTS: 'statements',
     RESULTS: 'results',
 });
+// get the statements
 const STATEMENTS = subjects;
+// get the parties
 const PARTIES = parties;
+// the least amount of seats a party must have if choosing that option
+const LEAST_AMOUNT = 1;
 
 // start button
 let startButton = document.getElementById('start-button');
@@ -70,7 +74,11 @@ function actionStatement(opinion) {
             answers[statementNumber] = { opinion: opinion };
             break;
     }
-    displayStatement(++statementNumber);
+    if (statementNumber + 1 >= STATEMENTS.length) {
+        getMenu(MENU.RESULTS);
+    } else {
+        displayStatement(++statementNumber);
+    }
 }
 
 /**
