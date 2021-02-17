@@ -86,6 +86,10 @@ let partySelectionCheckboxes = document.getElementById('party-selector-checkboxe
  */
 let importantSubjectsNextButton = document.getElementById('important-subjects-next');
 /**
+ * next button in the party selector view
+ */
+let partySelectorNextButton = document.getElementById('party-selector-next');
+/**
  * get the 'pro' button
  * "Eens"
  */
@@ -347,6 +351,10 @@ buttonSkip.onclick = function () {
 importantSubjectsNextButton.onclick = function () {
     getMenu(MENU.PARTY_SELECTION);
 }
+partySelectorNextButton.onclick = function () {
+    getMenu(MENU.RESULTS);
+}
+
 
 allPartiesRadio
 sittingParties
