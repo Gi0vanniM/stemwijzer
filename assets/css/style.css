@@ -16,3 +16,7 @@ html, body, .container{
 .text-left {
     text-align: left !important;
 }
+
+.radio {
+    border-radius: 50% !important;
+}

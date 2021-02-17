@@ -355,6 +355,16 @@ partySelectorNextButton.onclick = function () {
     getMenu(MENU.RESULTS);
 }
 
+// could use arrow functions here though =>
+// could make more dynamic as well
+// maybe not now
+allPartiesRadio.onclick = function () {
+    sittingParties.checked = false;
+}
+sittingParties.onclick = function () {
+    allPartiesRadio.checked = false;
+}
 
-allPartiesRadio
-sittingParties
+function updatePartySelection() {
+
+}
