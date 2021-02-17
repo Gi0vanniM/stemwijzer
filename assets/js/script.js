@@ -38,9 +38,13 @@ let resultsScreen = document.getElementById('results-screen');
  */
 let title = document.getElementById('title');
 /**
- * statement
+ * statement text
  */
 let statement = document.getElementById('statement');
+/**
+ * statement navbar
+ */
+let statementNavBar = document.getElementById('statements-navbar');
 /**
  * currently selected statement
  */
@@ -62,6 +66,10 @@ let importantSubjects = document.getElementById('important-subjects');
  * the div in which the user can click which subjects is extra important
  */
 let importantSubjectsCheckboxes = document.getElementById('important-subjects-checkboxes');
+/**
+ * next button in the important subjects view
+ */
+let importantSubjectsNextButton = document.getElementById('important-subjects-next');
 /**
  * get the 'pro' button
  * "Eens"
@@ -159,6 +167,7 @@ function getMenu(selectedMenu) {
     startScreen.hidden = true;
     statementsScreen.hidden = true;
     resultsScreen.hidden = true;
+    statementNavBar.hidden = true;
     document.body.classList.remove('background');
     switch (selectedMenu) {
         case MENU.START:
@@ -167,9 +176,11 @@ function getMenu(selectedMenu) {
             break;
         case MENU.STATEMENTS:
             statementsScreen.hidden = false;
+            statementNavBar.hidden = false;
             break;
         case MENU.RESULTS:
             resultsScreen.hidden = false;
+            statementNavBar.hidden = false;
             break;
         default:
             // nothing
@@ -279,4 +290,7 @@ buttonNone.onclick = function () {
 buttonSkip.onclick = function () {
     actionStatement('skip');
     this.blur();
+}
+importantSubjectsNextButton.onclick = function () {
+
 }
