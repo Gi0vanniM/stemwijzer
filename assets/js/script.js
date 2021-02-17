@@ -2,6 +2,7 @@
 const MENU = Object.freeze({
     START: 'start',
     STATEMENTS: 'statements',
+    IMPORTANT: 'important',
     RESULTS: 'results',
 });
 // get the statements
@@ -33,6 +34,10 @@ let statementsScreen = document.getElementById('statements-screen');
  * restult screen contianer
  */
 let resultsScreen = document.getElementById('results-screen');
+/**
+ * important subjects screen container
+ */
+let importantScreen = document.getElementById('important-screen');
 /**
  * title of question/statement
  */
@@ -128,13 +133,9 @@ createImportantSubjects();
  */
 function displayStatement(i = statementNumber) {
     if (statementNumber >= STATEMENTS.length) {
-        statementButtons.hidden = true;
-        statementParent.hidden = true;
-        importantSubjects.hidden = false;
+        getMenu(MENU.IMPORTANT);
     } else {
-        statementButtons.hidden = false;
-        statementParent.hidden = false;
-        importantSubjects.hidden = true;
+        getMenu(MENU.STATEMENTS);
         title.innerHTML = (i + 1) + '. ' + STATEMENTS[i].title;
         statement.innerHTML = STATEMENTS[i].statement.bold();
         if (answers[statementNumber] !== undefined) {
@@ -144,7 +145,7 @@ function displayStatement(i = statementNumber) {
 }
 
 /**
- *
+ * save the user's opinion and display next statement
  * @param {'pro' | 'contra' | 'none' | 'skip'} button
  */
 function actionStatement(opinion) {
@@ -168,6 +169,7 @@ function getMenu(selectedMenu) {
     statementsScreen.hidden = true;
     resultsScreen.hidden = true;
     statementNavBar.hidden = true;
+    importantScreen.hidden = true;
     document.body.classList.remove('background');
     switch (selectedMenu) {
         case MENU.START:
@@ -176,6 +178,10 @@ function getMenu(selectedMenu) {
             break;
         case MENU.STATEMENTS:
             statementsScreen.hidden = false;
+            statementNavBar.hidden = false;
+            break;
+        case MENU.IMPORTANT:
+            importantScreen.hidden = false;
             statementNavBar.hidden = false;
             break;
         case MENU.RESULTS:
