@@ -10,6 +10,11 @@ const STATEMENTS = subjects;
 const PARTIES = parties;
 // the least amount of seats a party must have if choosing that option
 const LEAST_AMOUNT = 1;
+/**
+ * extra important subjects multiplier
+ * multiply the amount of agreement the user finds extra important by (2 is default)
+ */
+const EXTRA_IMPORTANT_MULTIPLIER = 2;
 
 /**
  * start button
@@ -49,7 +54,7 @@ let backButton = document.getElementById('back-button');
  */
 let statementParent = document.getElementById('statements-parent');
 /**
- * important subjects/statements
+ * important subjects/statements div
  */
 let importantSubjects = document.getElementById('important-subjects');
 /**
@@ -176,17 +181,46 @@ function getMenu(selectedMenu) {
  * display subjects the user can choose is extra important
  */
 function createImportantSubjects() {
-    STATEMENTS.forEach(statement => {
+    STATEMENTS.forEach((statement, index) => {
         let div = `<div class="col-md-6 col-lg-4 mb-1">
         <label class="col-12 btn btn-white border rounded mx-n1">
-            <input type="checkbox" class="px-2 form-check-input mx-0" id="subject-${statement.id}">
-            <p id="important-subject-text-${statement.id}" class="ml-2 m-0">${statement.title}</p>
+            <input type="checkbox" class="px-2 form-check-input mx-0" id="subject-${index}">
+            <p id="important-subject-text-${index}" class="ml-2 m-0">${statement.title}</p>
         </label>
     </div>`;
         let template = document.createElement('template');
         template.innerHTML = div;
         importantSubjectsCheckboxes.appendChild(template.content.firstChild);
     });
+}
+
+/**
+ * calculate which party fits best to the user's input
+ * @returns {Array}
+ */
+function calculateResult() {
+    let resultParties = [];
+    STATEMENTS.forEach((statement, index) => {
+        let userOpinion = answers[index];
+        let extraImportant = (document.getElementById(`subject-${index}`)) ? document.getElementById(`subject-${index}`).checked : null;
+
+        PARTIES.forEach(party => {
+            // get the party's position from the subjects/STATEMENTS
+            let partyPosition = statement.parties.find(p => p.name === party.name);
+
+            if (partyPosition.position === userOpinion.opinion) {
+                // same opinion
+                amount = 1;
+                if (extraImportant) {
+                    amount *= EXTRA_IMPORTANT_MULTIPLIER;
+                }
+                // add amount to the party that has the same opinion
+                // if the party is not in the array yet, make one
+                resultParties[party.name] = { agree: (resultParties[party.name]) ? resultParties[party.name].agree + amount : amount };
+            }
+        })
+    })
+    return resultParties;
 }
 
 /**
