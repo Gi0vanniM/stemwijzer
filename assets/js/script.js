@@ -126,6 +126,9 @@ let allPartiesRadio = document.getElementById('allParties');
 // current parties radio button
 let sittingParties = document.getElementById('sittingParties');
 
+// current menu
+let currentMenu = MENU.START;
+
 /**
  * user's answers array
  */
@@ -193,22 +196,27 @@ function getMenu(selectedMenu) {
         case MENU.START:
             startScreen.hidden = false;
             document.body.classList.add('background');
+            currentMenu = MENU.START;
             break;
         case MENU.STATEMENTS:
             statementsScreen.hidden = false;
             statementNavBar.hidden = false;
+            currentMenu = MENU.STATEMENTS;
             break;
         case MENU.IMPORTANT:
             importantScreen.hidden = false;
             statementNavBar.hidden = false;
+            currentMenu = MENU.IMPORTANT;
             break;
         case MENU.PARTY_SELECTION:
             partyScreen.hidden = false;
             statementNavBar.hidden = false;
+            currentMenu = MENU.PARTY_SELECTION;
             break;
         case MENU.RESULTS:
             resultsScreen.hidden = false;
             statementNavBar.hidden = false;
+            currentMenu = MENU.RESULTS;
             break;
         default:
             // nothing
@@ -311,6 +319,9 @@ startButton.onclick = function () {
 backButton.onclick = function () {
     if (statementNumber <= 0) {
         getMenu(MENU.START);
+
+    } else if (currentMenu === MENU.PARTY_SELECTION) {
+        getMenu(MENU.IMPORTANT);
     } else {
         displayStatement(--statementNumber);
     }
@@ -337,3 +348,5 @@ importantSubjectsNextButton.onclick = function () {
     getMenu(MENU.PARTY_SELECTION);
 }
 
+allPartiesRadio
+sittingParties
