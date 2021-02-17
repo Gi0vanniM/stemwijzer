@@ -77,6 +77,11 @@ let importantSubjects = document.getElementById('important-subjects');
  */
 let importantSubjectsCheckboxes = document.getElementById('important-subjects-checkboxes');
 /**
+ * party selection checkboxes
+ * the div in which the user can click which parties to include
+ */
+let partySelectionCheckboxes = document.getElementById('party-selector-checkboxes');
+/**
  * next button in the important subjects view
  */
 let importantSubjectsNextButton = document.getElementById('important-subjects-next');
@@ -128,8 +133,10 @@ let answers = [];
 
 /**
  * generate the important subjects list
+ * and the parties for the party selecion
  */
 createImportantSubjects();
+createPartySelection();
 
 // 
 /**
@@ -218,6 +225,20 @@ function createImportantSubjects() {
         let template = document.createElement('template');
         template.innerHTML = div;
         importantSubjectsCheckboxes.appendChild(template.content.firstChild);
+    });
+}
+
+function createPartySelection() {
+    PARTIES.forEach((party, index) => {
+        let div = `<div class="col-md-6 col-lg-4 mb-1">
+        <label class="col-12 btn btn-white border rounded mx-n1">
+            <input type="checkbox" class="px-2 form-check-input mx-0" id="partyS-${index}">
+            <p id="partyS-text-${index}" class="ml-2 m-0">${party.name}</p>
+        </label>
+    </div>`;
+        let template = document.createElement('template');
+        template.innerHTML = div;
+        partySelectionCheckboxes.appendChild(template.content.firstChild);
     });
 }
 
@@ -310,3 +331,4 @@ buttonSkip.onclick = function () {
 importantSubjectsNextButton.onclick = function () {
     getMenu(MENU.PARTY_SELECTION);
 }
+
