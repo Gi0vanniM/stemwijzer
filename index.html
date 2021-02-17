@@ -35,7 +35,7 @@
             <h1 class="display-4">Stemwijzer</h1>
             <p class="lead">Om de stemwijzer te starten druk op de start knop</p>
             <p class="lead">
-                <button id="start-button" class="btn btn-primary">Start</button>
+                <button id="start-button" class="btn btn-primary btn-lg">Start</button>
             </p>
         </div>
     </div>
@@ -71,14 +71,17 @@
     <div class="container-fluid" id="important-screen" hidden>
         <div id="important-subjects" class="gap-2 form-check rounded p-5">
         
-            <div class="row">
-                <h1 id="important-subjects-title" class="col text-left">
+            <div class="row px-5">
+                <h1 id="important-subjects-title" class="col-md-8 text-left">
                     <b>Zijn er onderwerpen die je extra belangrijk vindt?</b>
                 </h1>
         
-                <div class="col">
-                    <button type="button" class="btn btn-primary float-right" id="important-subjects-next">Volgende
-                        stap</button>
+                <div class="col-md-4">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary btn-lg float-right" id="important-subjects-next">
+                            <b>Volgende stap</b>
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -91,36 +94,39 @@
     <div class="container-fluid" id="party-screen" hidden>
         <div id="party-selector" class="gap-2 form-check rounded p-5">
     
-            <div class="row">
-                <h1 id="party-selector-title" class="col text-left">
+            <div class="row px-5">
+                <h1 id="party-selector-title" class="col-md-8 text-left">
                     <b>Welke partijen wil je meenemen in het resultaat?</b>
                 </h1>
     
-                <div class="col">
-                    <button type="button" class="btn btn-primary float-right" id="party-selector-next">Volgende
-                        stap</button>
+                <div class="col-md-4">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary btn-lg float-right" id="party-selector-next">
+                            <b>Volgende stap</b>
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div class="row m-0 p-5 bg-light">
+            <div class="row m-0 p-5 bg-light rounded">
             
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <div class="btn-group btn-group-toggle pb-4" data-toggle="buttons">
                     <div class="col-md-6 col-lg-4 mb-1">
                         <label class="col-12 btn btn-white rounded mx-n1">
-                            <input type="radio" class="form-check-input mx-1" id="allParties">
+                            <input type="radio" name="partyRadioButton" class="form-check-input mx-1" id="allParties">
                             <p class="m-0 ml-2 text-left"> Alle partijen</p>
                         </label>
                     </div>
             
                     <div class="col-md-6 col-lg-4 mb-1">
                         <label class="col-12 btn btn-white rounded mx-n1">
-                            <input type="radio" class="form-check-input mx-1" id="sittingParties">
+                            <input type="radio" name="partyRadioButton" class="form-check-input mx-1" id="sittingParties">
                             <p class="m-0 ml-2 text-left"> Zittende partijen</p>
                         </label>
                     </div>
                 </div>
             
-                <div id="party-selector-checkboxes" class="row m-0 p-5 bg-light"></div>
+                <div id="party-selector-checkboxes" class="row m-0 bg-light"></div>
             </div>
         </div>
     </div>
