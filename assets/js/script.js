@@ -3,6 +3,7 @@ const MENU = Object.freeze({
     START: 'start',
     STATEMENTS: 'statements',
     IMPORTANT: 'important',
+    PARTY_SELECTION: 'partyselection',
     RESULTS: 'results',
 });
 // get the statements
@@ -38,6 +39,10 @@ let resultsScreen = document.getElementById('results-screen');
  * important subjects screen container
  */
 let importantScreen = document.getElementById('important-screen');
+/**
+ * party selection screen container
+ */
+let partyScreen = document.getElementById('party-screen');
 /**
  * title of question/statement
  */
@@ -170,6 +175,7 @@ function getMenu(selectedMenu) {
     resultsScreen.hidden = true;
     statementNavBar.hidden = true;
     importantScreen.hidden = true;
+    partyScreen.hidden = true;
     document.body.classList.remove('background');
     switch (selectedMenu) {
         case MENU.START:
@@ -182,6 +188,10 @@ function getMenu(selectedMenu) {
             break;
         case MENU.IMPORTANT:
             importantScreen.hidden = false;
+            statementNavBar.hidden = false;
+            break;
+        case MENU.PARTY_SELECTION:
+            partyScreen.hidden = false;
             statementNavBar.hidden = false;
             break;
         case MENU.RESULTS:
@@ -298,5 +308,5 @@ buttonSkip.onclick = function () {
     this.blur();
 }
 importantSubjectsNextButton.onclick = function () {
-
+    getMenu(MENU.PARTY_SELECTION);
 }
