@@ -234,7 +234,7 @@ function getMenu(selectedMenu) {
 function createImportantSubjects() {
     STATEMENTS.forEach((statement, index) => {
         let div = `<div class="col-md-6 col-lg-4 mb-1">
-        <label class="col-12 btn btn-white border rounded mx-n1">
+        <label class="col-12 btn btn-white bg-white border rounded mx-n1">
             <input type="checkbox" class="form-check-input mx-1" id="subject-${index}">
             <p id="important-subject-text-${index}" class="m-0 ml-2 text-left">${statement.title}</p>
         </label>
@@ -248,7 +248,7 @@ function createImportantSubjects() {
 function createPartySelection() {
     PARTIES.forEach((party, index) => {
         let div = `<div class="col-md-6 col-lg-4 mb-1">
-        <label class="col-12 btn btn-white border rounded mx-n1">
+        <label class="col-12 btn btn-white bg-white border rounded mx-n1">
             <input type="checkbox" class="form-check-input mx-1" id="partyS-${index}">
             <p id="partyS-text-${index}" class="m-0 ml-2 text-left">${party.name}</p>
         </label>
