@@ -12,3 +12,7 @@ html, body, .container{
     background-size: cover;
     transition: .5s;
 }
+
+.text-left {
+    text-align: left !important;
+}

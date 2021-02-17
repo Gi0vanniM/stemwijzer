@@ -121,6 +121,11 @@ let allStatementButtons = {
  */
 let statementButtons = document.getElementById('statement-buttons');
 
+// all parties radio button
+let allPartiesRadio = document.getElementById('allParties');
+// current parties radio button
+let sittingParties = document.getElementById('sittingParties');
+
 /**
  * user's answers array
  */
@@ -218,8 +223,8 @@ function createImportantSubjects() {
     STATEMENTS.forEach((statement, index) => {
         let div = `<div class="col-md-6 col-lg-4 mb-1">
         <label class="col-12 btn btn-white border rounded mx-n1">
-            <input type="checkbox" class="px-2 form-check-input mx-0" id="subject-${index}">
-            <p id="important-subject-text-${index}" class="ml-2 m-0">${statement.title}</p>
+            <input type="checkbox" class="form-check-input mx-1" id="subject-${index}">
+            <p id="important-subject-text-${index}" class="m-0 ml-2 text-left">${statement.title}</p>
         </label>
     </div>`;
         let template = document.createElement('template');
@@ -232,8 +237,8 @@ function createPartySelection() {
     PARTIES.forEach((party, index) => {
         let div = `<div class="col-md-6 col-lg-4 mb-1">
         <label class="col-12 btn btn-white border rounded mx-n1">
-            <input type="checkbox" class="px-2 form-check-input mx-0" id="partyS-${index}">
-            <p id="partyS-text-${index}" class="ml-2 m-0">${party.name}</p>
+            <input type="checkbox" class="form-check-input mx-1" id="partyS-${index}">
+            <p id="partyS-text-${index}" class="m-0 ml-2 text-left">${party.name}</p>
         </label>
     </div>`;
         let template = document.createElement('template');
