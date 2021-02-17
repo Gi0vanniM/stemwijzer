@@ -11,43 +11,91 @@ const PARTIES = parties;
 // the least amount of seats a party must have if choosing that option
 const LEAST_AMOUNT = 1;
 
-// start button
+/**
+ * start button
+ * @type {HTMLElement}
+ */
 let startButton = document.getElementById('start-button');
-// start screen container
+/**
+ * start screen container
+ */
 let startScreen = document.getElementById('start-screen')
-// statements screen container
+/**
+ * statements screen container
+ */
 let statementsScreen = document.getElementById('statements-screen');
-// restult screen contianer
+/**
+ * restult screen contianer
+ */
 let resultsScreen = document.getElementById('results-screen');
-// title of question/statement
+/**
+ * title of question/statement
+ */
 let title = document.getElementById('title');
-// statement
+/**
+ * statement
+ */
 let statement = document.getElementById('statement');
-// currently selected statement 
+/**
+ * currently selected statement
+ */
 let statementNumber = 0;
-// back button
+/**
+ * back button
+ */
 let backButton = document.getElementById('back-button');
-// get the parent div of title and statement
+/**
+ * get the parent div of title and statement
+ */
 let statementParent = document.getElementById('statements-parent');
-
-// important subjects/statements
+/**
+ * important subjects/statements
+ */
 let importantSubjects = document.getElementById('important-subjects');
+/**
+ * important subjects checkboxes
+ * the div in which the user can click which subjects is extra important
+ */
 let importantSubjectsCheckboxes = document.getElementById('important-subjects-checkboxes');
-
-// statement buttons
+/**
+ * get the 'pro' button
+ * "Eens"
+ */
 let buttonPro = document.getElementById('button-pro');
+/**
+ * get the 'contra' button
+ * "Oneens"
+ */
 let buttonContra = document.getElementById('button-contra');
+/**
+ * get the 'none' button
+ * "Geen van beide"
+ */
 let buttonNone = document.getElementById('button-none');
+/**
+ * get the 'skip' button
+ * "Overslaan"
+ */
 let buttonSkip = document.getElementById('button-skip');
+/**
+ * all statement buttons in an object so we can loop through,
+ * or get the correct button by just their name like 'pro'.
+ * allStatementButtons[answers[statementNumber].opinion]
+ */
 let allStatementButtons = {
     'pro': buttonPro,
     'contra': buttonContra,
     'none': buttonNone,
     'skip': buttonSkip
 };
+/**
+ * get the parent div of statement buttons
+ */
 let statementButtons = document.getElementById('statement-buttons');
 
-// user's answers
+/**
+ * user's answers array
+ */
 let answers = [];
 
 // pro contra none
@@ -55,7 +103,9 @@ let answers = [];
 // parties
 // subjects
 
-// generate the important subjects list
+/**
+ * generate the important subjects list
+ */
 createImportantSubjects();
 
 // 
@@ -154,20 +204,23 @@ function highlightButtons() {
     }
     if (answers[statementNumber] !== undefined) {
         // get the answer of current statement
-        let b = answers[statementNumber];
+        let buttonName = answers[statementNumber].opinion;
         // get the needed button and then highlight it by using the 'active' class
-        allStatementButtons[b.opinion].classList.add("active");
+        allStatementButtons[buttonName].classList.add("active");
     }
 }
 
 /**
  * Event listeners
  */
+
+// start button
 startButton.onclick = function () {
     getMenu(MENU.STATEMENTS);
     displayStatement(statementNumber);
 }
 
+// backbutton
 backButton.onclick = function () {
     if (statementNumber <= 0) {
         getMenu(MENU.START);
@@ -176,6 +229,7 @@ backButton.onclick = function () {
     }
 }
 
+// register event listeners to the buttons
 buttonPro.onclick = function () {
     actionStatement('pro');
     this.blur();
