@@ -313,6 +313,32 @@ function highlightButtons() {
 }
 
 /**
+ * update the party selection
+ */
+function updatePartySelection() {
+    allPartiesSelections.forEach((party) => {
+        party.checked = false;
+    });
+    if (allPartiesRadio.checked || currentPartiesRadio.checked) {
+        if (allPartiesRadio.checked) {
+            allPartiesSelections.forEach((party) => {
+                party.checked = true;
+            });
+        } else if (currentPartiesRadio.checked) {
+            PARTIES.forEach((party) => {
+                if (party.size > 0) {
+                    document.getElementById('partyS-' + party.name).checked = true;
+                }
+            })
+        }
+    } else {
+        allPartiesSelections.forEach((party) => {
+            party.checked = false;
+        });
+    }
+}
+
+/**
  * Event listeners
  */
 
@@ -368,27 +394,4 @@ allPartiesRadio.onclick = function () {
 currentPartiesRadio.onclick = function () {
     allPartiesRadio.checked = false;
     updatePartySelection();
-}
-
-function updatePartySelection() {
-    allPartiesSelections.forEach((party) => {
-        party.checked = false;
-    });
-    if (allPartiesRadio.checked || currentPartiesRadio.checked) {
-        if (allPartiesRadio.checked) {
-            allPartiesSelections.forEach((party) => {
-                party.checked = true;
-            });
-        } else if (currentPartiesRadio.checked) {
-            PARTIES.forEach((party) => {
-                if (party.size > 0) {
-                    document.getElementById('partyS-' + party.name).checked = true;
-                }
-            })
-        }
-    } else {
-        allPartiesSelections.forEach((party) => {
-            party.checked = false;
-        });
-    }
 }
