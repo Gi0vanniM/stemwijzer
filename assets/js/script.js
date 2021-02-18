@@ -368,6 +368,9 @@ backButton.onclick = function () {
 
     } else if (currentMenu === MENU.PARTY_SELECTION) {
         getMenu(MENU.IMPORTANT);
+    }
+    else if (currentMenu === MENU.RESULTS) {
+        getMenu(MENU.PARTY_SELECTION);
     } else {
         displayStatement(--statementNumber);
     }
@@ -411,6 +414,10 @@ currentPartiesRadio.onclick = function () {
 
 allPartiesSelections.forEach((sel) => {
     sel.onchange = () => {
-        console.log(this);
+        if (Array.from(allPartiesSelections).some(e => e.checked)) {
+            partySelectorNextButton.classList.remove('disabled');
+        } else {
+            partySelectorNextButton.classList.add('disabled');
+        }
     }
 })
