@@ -127,8 +127,10 @@ let statementButtons = document.getElementById('statement-buttons');
 
 // all parties radio button
 let allPartiesRadio = document.getElementById('allParties');
-// current parties radio button
-let currentPartiesRadio = document.getElementById('currentParties');
+// secular parties radio button
+let secularPartiesRadio = document.getElementById('secularParties');
+// party results div
+let partyResultsDiv = document.getElementById('party-results');
 
 // current menu
 let currentMenu = MENU.START;
@@ -145,7 +147,7 @@ let answers = [];
 
 /**
  * generate the important subjects list
- * and the parties for the party selecion
+ * and the parties for the party selection
  */
 createImportantSubjects();
 createPartySelection();
@@ -224,6 +226,7 @@ function getMenu(selectedMenu) {
             resultsScreen.hidden = false;
             statementNavBar.hidden = false;
             currentMenu = MENU.RESULTS;
+            displayResults();
             break;
         default:
             // nothing
@@ -320,7 +323,7 @@ function updatePartySelection() {
     allPartiesSelections.forEach((party) => {
         party.checked = false;
     });
-    if (allPartiesRadio.checked || currentPartiesRadio.checked) {
+    if (allPartiesRadio.checked || secularPartiesRadio.checked) {
 
         if (allPartiesRadio.checked) {
             // check all the parties
@@ -330,11 +333,11 @@ function updatePartySelection() {
             // enable the next button
             partySelectorNextButton.classList.remove('disabled');
 
-        } else if (currentPartiesRadio.checked) {
+        } else if (secularPartiesRadio.checked) {
 
             PARTIES.forEach((party) => {
                 // only check the current parties 
-                if (party.size > 0) {
+                if (party.secular) {
                     document.getElementById('partyS-' + party.name).checked = true;
                 }
             });
@@ -365,7 +368,6 @@ startButton.onclick = function () {
 backButton.onclick = function () {
     if (statementNumber <= 0) {
         getMenu(MENU.START);
-
     } else if (currentMenu === MENU.PARTY_SELECTION) {
         getMenu(MENU.IMPORTANT);
     }
@@ -404,10 +406,10 @@ partySelectorNextButton.onclick = function () {
 // could make more dynamic as well
 // maybe not now
 allPartiesRadio.onclick = function () {
-    currentPartiesRadio.checked = false;
+    secularPartiesRadio.checked = false;
     updatePartySelection();
 }
-currentPartiesRadio.onclick = function () {
+secularPartiesRadio.onclick = function () {
     allPartiesRadio.checked = false;
     updatePartySelection();
 }
