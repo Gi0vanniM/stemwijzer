@@ -128,7 +128,7 @@ let statementButtons = document.getElementById('statement-buttons');
 // all parties radio button
 let allPartiesRadio = document.getElementById('allParties');
 // current parties radio button
-let sittingParties = document.getElementById('sittingParties');
+let currentPartiesRadio = document.getElementById('currentParties');
 
 // current menu
 let currentMenu = MENU.START;
@@ -149,6 +149,9 @@ let answers = [];
  */
 createImportantSubjects();
 createPartySelection();
+
+// declare after the party selection has been created
+let allPartiesSelections = document.querySelectorAll('.partySelections');
 
 // 
 /**
@@ -249,8 +252,8 @@ function createPartySelection() {
     PARTIES.forEach((party, index) => {
         let div = `<div class="col-md-6 col-lg-4 mb-1">
         <label class="col-12 btn btn-white bg-white border rounded mx-n1">
-            <input type="checkbox" class="form-check-input mx-1" id="partyS-${index}">
-            <p id="partyS-text-${index}" class="m-0 ml-2 text-left">${party.name}</p>
+            <input type="checkbox" class="form-check-input mx-1 partySelections" id="partyS-${party.name}">
+            <p id="partyS-text-${party.name}" class="m-0 ml-2 text-left">${party.long ?? party.name}</p>
         </label>
     </div>`;
         let template = document.createElement('template');
@@ -359,12 +362,33 @@ partySelectorNextButton.onclick = function () {
 // could make more dynamic as well
 // maybe not now
 allPartiesRadio.onclick = function () {
-    sittingParties.checked = false;
+    currentPartiesRadio.checked = false;
+    updatePartySelection();
 }
-sittingParties.onclick = function () {
+currentPartiesRadio.onclick = function () {
     allPartiesRadio.checked = false;
+    updatePartySelection();
 }
 
 function updatePartySelection() {
-
+    allPartiesSelections.forEach((party) => {
+        party.checked = false;
+    });
+    if (allPartiesRadio.checked || currentPartiesRadio.checked) {
+        if (allPartiesRadio.checked) {
+            allPartiesSelections.forEach((party) => {
+                party.checked = true;
+            });
+        } else if (currentPartiesRadio.checked) {
+            PARTIES.forEach((party) => {
+                if (party.size > 0) {
+                    document.getElementById('partyS-' + party.name).checked = true;
+                }
+            })
+        }
+    } else {
+        allPartiesSelections.forEach((party) => {
+            party.checked = false;
+        });
+    }
 }
