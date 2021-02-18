@@ -173,6 +173,33 @@ function displayStatement(i = statementNumber) {
     }
 }
 
+function displayResults() {
+    let partyResults = calculateResult().sort((a, b) => parseInt(b.agree) - parseInt(a.agree));
+
+    partyResults.forEach((partyR) => {
+        let party = PARTIES.find(p => p.name == partyR.name);
+        let partySel = document.getElementById('partyS-' + party.name);
+        // party will only be displayed if it was selected
+        if (partySel.checked) {
+            let percent = partyR.agree / STATEMENTS.length * 100;
+            console.log(party.name, partyR.name, percent);
+            let div = `<div class="">
+            <label class="card bg-white border rounded mx-n1">
+                <h1 id="partyR-text-${party.name}" class="m-0 ml-2 text-left"><b>${party.long ? party.name + ' | ' + party.long : party.name} ${parseInt(percent)}%</b></h1>
+                <progress value="${percent}" max="100"></progress>
+            </label>
+        </div>`;
+            let template = document.createElement('template');
+            template.innerHTML = div;
+            partyResultsDiv.appendChild(template.content.firstChild);
+        }
+    })
+
+    PARTIES.forEach((party, index) => {
+
+    });
+}
+
 /**
  * save the user's opinion and display next statement
  * @param {'pro' | 'contra' | 'none' | 'skip'} button
@@ -263,6 +290,8 @@ function createPartySelection() {
         template.innerHTML = div;
         partySelectionCheckboxes.appendChild(template.content.firstChild);
     });
+    allPartiesRadio.checked = false;
+    secularPartiesRadio.checked = false;
 }
 
 /**
@@ -275,7 +304,7 @@ function calculateResult() {
         let userOpinion = answers[index];
         let extraImportant = (document.getElementById(`subject-${index}`)) ? document.getElementById(`subject-${index}`).checked : null;
 
-        PARTIES.forEach(party => {
+        PARTIES.forEach((party, indexP) => {
             // get the party's position from the subjects/STATEMENTS
             let partyPosition = statement.parties.find(p => p.name === party.name);
 
@@ -287,10 +316,14 @@ function calculateResult() {
                 }
                 // add amount to the party that has the same opinion
                 // if the party is not in the array yet, make one
-                resultParties[party.name] = { agree: (resultParties[party.name]) ? resultParties[party.name].agree + amount : amount };
+                resultParties[indexP] = { name: party.name, agree: (resultParties[indexP]) ? resultParties[indexP].agree + amount : amount };
+
+            } else if (!resultParties[indexP]) {
+                // if the party has not been declared here it will be
+                resultParties[indexP] = { name: party.name, agree: 0 };
             }
-        })
-    })
+        });
+    });
     return resultParties;
 }
 
