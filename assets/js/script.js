@@ -316,25 +316,38 @@ function highlightButtons() {
  * update the party selection
  */
 function updatePartySelection() {
+    // deselect all the parties
     allPartiesSelections.forEach((party) => {
         party.checked = false;
     });
     if (allPartiesRadio.checked || currentPartiesRadio.checked) {
+
         if (allPartiesRadio.checked) {
+            // check all the parties
             allPartiesSelections.forEach((party) => {
                 party.checked = true;
             });
+            // enable the next button
+            partySelectorNextButton.classList.remove('disabled');
+
         } else if (currentPartiesRadio.checked) {
+
             PARTIES.forEach((party) => {
+                // only check the current parties 
                 if (party.size > 0) {
                     document.getElementById('partyS-' + party.name).checked = true;
                 }
-            })
+            });
+            // enable the next button
+            partySelectorNextButton.classList.remove('disabled');
         }
     } else {
+        // deselect all the parties
         allPartiesSelections.forEach((party) => {
             party.checked = false;
         });
+        // disable the next button
+        partySelectorNextButton.classList.add('disabled');
     }
 }
 
@@ -395,3 +408,9 @@ currentPartiesRadio.onclick = function () {
     allPartiesRadio.checked = false;
     updatePartySelection();
 }
+
+allPartiesSelections.forEach((sel) => {
+    sel.onchange = () => {
+        console.log(this);
+    }
+})
