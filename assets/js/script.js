@@ -229,7 +229,9 @@ function displayResults() {
             let div = `<div class="">
             <label class="card bg-white border rounded mx-n1">
                 <h1 id="partyR-text-${party.name}" class="m-0 ml-2 text-left"><b>${party.long ? party.name + ' | ' + party.long : party.name} ${parseInt(percent)}%</b></h1>
-                <progress value="${percent}" max="100"></progress>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: ${percent}%" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
             </label>
         </div>`;
             let template = document.createElement('template');
