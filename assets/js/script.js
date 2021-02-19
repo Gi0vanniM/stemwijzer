@@ -131,6 +131,12 @@ let allPartiesRadio = document.getElementById('allParties');
 let secularPartiesRadio = document.getElementById('secularParties');
 // party results div
 let partyResultsDiv = document.getElementById('party-results');
+// toggle button to show what parties think
+let toggleParties = document.getElementById('toggleParties');
+// collapse div of what parties think
+let collapseParties = document.getElementById('collapseParties');
+// div where parties show what they think
+let partyOpinions = document.getElementById('partyOpinions');
 
 // current menu
 let currentMenu = MENU.START;
@@ -170,7 +176,44 @@ function displayStatement(i = statementNumber) {
         if (answers[statementNumber] !== undefined) {
             highlightButtons();
         }
+        displayPartyOpinions(STATEMENTS[i]);
     }
+}
+
+function displayPartyOpinions(statement) {
+    let proCol = document.getElementById('partyOpinions-pro');
+    proCol.innerHTML = '';
+    let noneCol = document.getElementById('partyOpinions-none');
+    noneCol.innerHTML = '';
+    let contraCol = document.getElementById('partyOpinions-contra');
+    contraCol.innerHTML = '';
+
+    PARTIES.forEach((party) => {
+        let partySubject = statement.parties.find(p => p.name == party.name);
+        let div = `<div class="dropdown">
+        <button class="btn btn-light dropdown-toggle" type="button"
+            id="dropdownPartyOpinion-${party.name}" data-bs-toggle="dropdown" aria-expanded="false">
+            ${party.name}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownPartyOpinion-${party.name}">
+            <p class="mt-1">${partySubject.opinion}</p>
+        </ul>
+    </div>`;
+        let template = document.createElement('template');
+        template.innerHTML = div;
+        // partyOpinions.appendChild(template.content.firstChild);
+        switch (partySubject.position) {
+            case 'pro':
+                proCol.appendChild(template.content.firstChild);
+                break;
+            case 'none':
+                noneCol.appendChild(template.content.firstChild);
+                break;
+            case 'contra':
+                contraCol.appendChild(template.content.firstChild);
+                break;
+        }
+    });
 }
 
 function displayResults() {
@@ -456,3 +499,11 @@ allPartiesSelections.forEach((sel) => {
         }
     }
 })
+
+toggleParties.onclick = function () {
+    if (collapseParties.hidden) {
+        collapseParties.hidden = false;
+    } else {
+        collapseParties.hidden = true;
+    }
+}
