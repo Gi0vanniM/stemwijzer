@@ -217,6 +217,7 @@ function displayPartyOpinions(statement) {
 }
 
 function displayResults() {
+    partyResultsDiv.innerHTML = '';
     let partyResults = calculateResult().sort((a, b) => parseInt(b.agree) - parseInt(a.agree));
 
     partyResults.forEach((partyR) => {
@@ -225,7 +226,6 @@ function displayResults() {
         // party will only be displayed if it was selected
         if (partySel.checked) {
             let percent = partyR.agree / STATEMENTS.length * 100;
-            console.log(party.name, partyR.name, percent);
             let div = `<div class="">
             <label class="card bg-white border rounded mx-n1">
                 <h1 id="partyR-text-${party.name}" class="m-0 ml-2 text-left"><b>${party.long ? party.name + ' | ' + party.long : party.name} ${parseInt(percent)}%</b></h1>
