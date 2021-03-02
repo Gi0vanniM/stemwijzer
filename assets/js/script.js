@@ -238,10 +238,6 @@ function displayResults() {
             template.innerHTML = div;
             partyResultsDiv.appendChild(template.content.firstChild);
         }
-    })
-
-    PARTIES.forEach((party, index) => {
-
     });
 }
 
